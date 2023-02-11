@@ -28,10 +28,13 @@ const handelOnChanged = (event)=>{
   setText(event.target.value);
 }
   const [text, setText] = useState('');
+  const fontColor = {
+    color: props.mode == "light"?"":"white"
+  }
   return (
     <>
     <div className='container'>
-      <h1>{props.heading}</h1>
+      <h1 style={fontColor}>{props.heading}</h1>
         <div className="mb-3 my-3">
         <textarea className="form-control" value={text} onChange={handelOnChanged}id="myBox" rows="10"></textarea>
         </div>
@@ -43,9 +46,9 @@ const handelOnChanged = (event)=>{
     </div>
     
     <div className="container my-3">
-      <h1>Your Text Summary</h1>
-      <p>{text.split(" ").length} Words And {text.length} Charcters</p>
-      <p>{0.008 * text.split(" ").length} Minutes read</p>
+      <h1 style={fontColor}>Your Text Summary</h1>
+      <p style={fontColor}>{text.split(" ").length} Words And {text.length} Charcters</p>
+      <p style={fontColor}>{0.008 * text.split(" ").length} Minutes read</p>
           
     </div>
     
