@@ -6,16 +6,19 @@ export default function Textform(props) {
   //console.log("Uppercase Was Clicked");
   let newText = text.toUpperCase();
   setText(newText)
+  props.showAlert("Uppercase Done","success")
 }
 const handleloClick = ()=>{
   //console.log("Lowercase Was Clicked");
   let newText = text.toLowerCase();
   setText(newText)
+  props.showAlert("Lowercase Done","success")
 }
 const handleclearClick = ()=>{
   //console.log("Lowercase Was Clicked");
   let newText = '';
   setText(newText)
+  props.showAlert("All Text Was Cleared","success")
 }
 const speak = () => {
   let msg = new SpeechSynthesisUtterance();
@@ -29,7 +32,7 @@ const handelOnChanged = (event)=>{
 }
   const [text, setText] = useState('');
   const fontColor = {
-    color: props.mode == "light"?"":"white"
+    color: props.mode === "light"?"":"white"
   }
   return (
     <>
@@ -42,7 +45,6 @@ const handelOnChanged = (event)=>{
         <button className="btn btn-primary mx-2 my-2" onClick={handleloClick} >Convert To Lowercase</button>
         <button className="btn btn-primary mx-2 my-2" onClick={handleclearClick} >Clear Text</button>
         <button className="btn btn-primary mx-2 my-2" onClick={speak}>Speak</button>
-        
     </div>
     
     <div className="container my-3">
