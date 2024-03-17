@@ -42,7 +42,7 @@ function App() {
         <Alert alert={alert} />
         <div className="container my-3">
           {/* <Routes> */}
-          <Textform showAlert={showAlert} heading="Enter The Text" mode={mode} />
+          <Textform showAlert={showAlert} heading="Hello" mode={mode} />
             {/* <Route exact path="/" element={<Textform showAlert={showAlert} heading="Enter The Text" mode={mode} />} /> */}
             {/* <Route exact path="/about" element={<About />} /> */}
           {/* </Routes> */}
