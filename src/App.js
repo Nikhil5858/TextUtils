@@ -1,12 +1,10 @@
 import "./App.css";
-
 import { useState } from "react";
-
 import About from "./Components/About";
 import Navbar from "./Components/Navbar";
 import Textform from "./Components/Textform";
 import Alert from "./Components/Alert";
-// import { BrowserRouter as Router, Route, Routes,Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom"; 
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -23,32 +21,28 @@ function App() {
   };
 
   const toggleMode = () => {
-    if (mode === "light") {
-      setMode("dark");
-      document.body.style.backgroundColor = "#495057";
-      showAlert("Dark Mode Was Enabaled", "success");
-      document.title = "TextUtils - Home Darkmode";
-    } else {
-      document.body.style.backgroundColor = "white";
-      setMode("light");
-      showAlert("Light Mode Was Enabaled", "success");
-      document.title = "TextUtils - Home";
-    }
+    const newMode = mode === "light" ? "dark" : "light";
+    setMode(newMode);
+    document.body.style.backgroundColor = newMode === "dark" ? "#495057" : "white";
+    showAlert(`${newMode === "dark" ? "Dark" : "Light"} Mode Was Enabled`, "success");
+    document.title = `TextUtils - Home ${newMode === "dark" ? "Darkmode" : ""}`;
   };
+
   return (
     <>
-      {/* <Router> */}
+      <Router>
         <Navbar title="TextUtils" toggleMode={toggleMode} mode={mode} />
         <Alert alert={alert} />
         <div className="container my-3">
-          {/* <Routes> */}
-          <Textform showAlert={showAlert} heading="Hello" mode={mode} />
-            {/* <Route exact path="/" element={<Textform showAlert={showAlert} heading="Enter The Text" mode={mode} />} /> */}
-            {/* <Route exact path="/about" element={<About />} /> */}
-          {/* </Routes> */}
+          <Routes>
+            <Route path="/home" element={<Textform showAlert={showAlert} heading="Enter The Text" mode={mode} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Textform showAlert={showAlert} heading="Enter The Text" mode={mode} />} />
+          </Routes>
         </div>
-      {/* </Router> */}
+      </Router>
     </>
   );
 }
+
 export default App;

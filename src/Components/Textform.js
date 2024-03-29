@@ -49,7 +49,7 @@ const handelOnChanged = (event)=>{
     
     <div className="container my-3">
       <h1 style={fontColor}>Your Text Summary</h1>
-      <p style={fontColor}>{text.split(" ").length} Words And {text.length} Charcters</p>
+      <p style={fontColor}>{text.split(/\s+/).filter((element)=>{return element.length !== 0}).length} Words And {text.length} Charcters</p>
       <p style={fontColor}>{0.008 * text.split(" ").length} Minutes read</p>
           
     </div>

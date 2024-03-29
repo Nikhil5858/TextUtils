@@ -1,38 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const closeNavbar = () => {
+    setIsCollapsed(true);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="">
+        <Link className="navbar-brand" to="/home">
           {props.title}
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          onClick={toggleCollapse}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          className={`collapse navbar-collapse ${isCollapsed ? "" : "show"}`}
+          id="navbarSupportedContent"
+        >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="">
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="/home"
+                onClick={closeNavbar} // Close navbar when Home is clicked
+              >
                 Home
-              </a>
+              </Link>
             </li>
-            {/* <li className="nav-item">
-              <a className="nav-link" href="/about">
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to="/about"
+                onClick={closeNavbar} // Close navbar when About is clicked
+              >
                 About
                 {props.about}
-              </a>
-            </li> */}
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="form-check form-switch">
@@ -48,7 +66,8 @@ export default function Navbar(props) {
     </nav>
   );
 }
-Navbar.prototype = {
+
+Navbar.propTypes = {
   title: PropTypes.string,
   about: PropTypes.string,
 };
